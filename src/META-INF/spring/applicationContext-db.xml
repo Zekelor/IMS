@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context" xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		http://www.springframework.org/schema/jee
+		http://www.springframework.org/schema/jee/spring-jee-4.1.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+	<context:annotation-config />
+	<context:component-scan base-package="com.yhl.f22.frame.db" />
+
+	<!-- proxool 加载配置信息类 -->
+	<bean id="proxoolDatasourceStarter" class="com.yhl.f22.frame.db.lang.ProxoolDatasourceStarter">
+		<property name="order">
+			<value>0</value>
+		</property>
+		<property name="alias">
+			<value>f22_pool</value>
+		</property>
+		<property name="driver">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="driverUrl">
+			<value>jdbc:mysql://172.16.2.104:3306/qmcdb?useUnicode=true&amp;characterEncoding=UTF-8</value>
+		</property>
+		<property name="user">
+			<value>qmc</value>
+		</property>
+		<property name="password">
+			<value>qmc</value>
+		</property>
+		<property name="prototypeCount">
+			<value>5</value>
+		</property>
+		<property name="maximumConnectionCount">
+			<value>200</value>
+		</property>
+		<property name="simultaneousBuildThrottle">
+			<value>30</value>
+		</property>
+		<property name="minimumConnectionCount">
+			<value>2</value>
+		</property>
+		<property name="trace">
+			<value>true</value>
+		</property>
+		<property name="verbose">
+			<value>false</value>
+		</property>
+	</bean>
+
+	<!-- MyBatis配置 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation">
+			<value>classpath:META-INF/mybatis/sql-map-config.xml</value>
+		</property>
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- 声明式事务 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- 事务属性 -->
+	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- AOP事务植入 -->
+	<aop:config>
+		<aop:advisor advice-ref="transactionAdvice" pointcut="execution(* com.yhl.f22.frame.service.*.*(..))" />
+	</aop:config>
+
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName">
+			<value>org.logicalcobwebs.proxool.ProxoolDriver</value>
+		</property>
+		<property name="url" value="proxool.f22_pool" />
+	</bean>
+
+	<bean id="qmcGroupsMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.yhl.f22.frame.db.dao.QmcGroupsMapper" />
+	</bean>
+	<bean id="qmcQqMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.yhl.f22.frame.db.dao.QmcQqMapper" />
+	</bean>
+	<bean id="qmcLogMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.yhl.f22.frame.db.dao.QmcLogMapper" />
+	</bean>
+	<bean id="qmcUsersMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.yhl.f22.frame.db.dao.QmcUsersMapper" />
+	</bean>
+	<bean id="qmcMsgsMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.yhl.f22.frame.db.dao.QmcMsgsMapper" />
+	</bean>
+</beans>

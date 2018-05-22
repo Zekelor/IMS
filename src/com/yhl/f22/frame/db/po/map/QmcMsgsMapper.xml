@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.yhl.f22.frame.db.dao.QmcMsgsMapper">
+	<resultMap id="BaseResultMap" type="com.yhl.f22.frame.db.po.impl.QmcMsgs">
+		<id column="qmc_mid" property="qmcMid" jdbcType="BIGINT" />
+		<result column="qmc_group" property="qmcGroup" jdbcType="VARCHAR" />
+		<result column="qmc_group_uin" property="qmcGroupUin" jdbcType="VARCHAR" />
+		<result column="qmc_sender" property="qmcSender" jdbcType="VARCHAR" />
+		<result column="qmc_sender_uin" property="qmcSenderUin" jdbcType="VARCHAR" />
+		<result column="qmc_sender_nick" property="qmcSenderNick" jdbcType="VARCHAR" />
+		<result column="qmc_msg_date" property="qmcMsgDate" jdbcType="BIGINT" />
+		<result column="qmc_from_qq" property="qmcFromQq" jdbcType="VARCHAR" />
+		<result column="qmc_no" property="qmcNo" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.yhl.f22.frame.db.po.impl.QmcMsgs" extends="BaseResultMap">
+		<result column="qmc_msg" property="qmcMsg" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		qmc_mid, qmc_group, qmc_group_uin, qmc_sender, qmc_sender_uin, qmc_sender_nick, qmc_msg_date,
+		qmc_from_qq, qmc_no
+	</sql>
+	<sql id="Blob_Column_List">
+		qmc_msg
+	</sql>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.yhl.f22.frame.db.po.impl.QmcMsgsExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from qmc_msgs
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yhl.f22.frame.db.po.impl.QmcMsgsExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from qmc_msgs
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByExampleWithBLOBsAndPage" resultMap="ResultMapWithBLOBs" parameterType="com.yhl.f22.frame.db.po.impl.QmcMsgsExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from qmc_msgs
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.yhl.f22.frame.db.po.impl.QmcMsgsExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from qmc_msgs
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<delete id="deleteByExample" parameterType="com.yhl.f22.frame.db.po.impl.QmcMsgsExample">
+		delete from qmc_msgs
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<select id="countByExample" parameterType="com.yhl.f22.frame.db.po.impl.QmcMsgsExample" resultType="java.lang.Integer">
+		select count(*) from qmc_msgs
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update qmc_msgs
+		<set>
+			<if test="record.qmcMid != null">
+				qmc_mid = #{record.qmcMid,jdbcType=BIGINT},
+			</if>
+			<if test="record.qmcGroup != null">
+				qmc_group = #{record.qmcGroup,jdbcType=VARCHAR},
+			</if>
+			<if test="record.qmcGroupUin != null">
+				qmc_group_uin = #{record.qmcGroupUin,jdbcType=VARCHAR},
+			</if>
+			<if test="record.qmcSender != null">
+				qmc_sender = #{record.qmcSender,jdbcType=VARCHAR},
+			</if>
+			<if test="record.qmcSenderUin != null">
+				qmc_sender_uin = #{record.qmcSenderUin,jdbcType=VARCHAR},
+			</if>
+			<if test="record.qmcSenderNick != null">
+				qmc_sender_nick = #{record.qmcSenderNick,jdbcType=VARCHAR},
+			</if>
+			<if test="record.qmcMsgDate != null">
+				qmc_msg_date = #{record.qmcMsgDate,jdbcType=BIGINT},
+			</if>
+			<if test="record.qmcFromQq != null">
+				qmc_from_qq = #{record.qmcFromQq,jdbcType=VARCHAR},
+			</if>
+			<if test="record.qmcNo != null">
+				qmc_no = #{record.qmcNo,jdbcType=VARCHAR},
+			</if>
+			<if test="record.qmcMsg != null">
+				qmc_msg = #{record.qmcMsg,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExampleWithBLOBs" parameterType="map">
+		update qmc_msgs
+		set qmc_mid = #{record.qmcMid,jdbcType=BIGINT},
+		qmc_group = #{record.qmcGroup,jdbcType=VARCHAR},
+		qmc_group_uin = #{record.qmcGroupUin,jdbcType=VARCHAR},
+		qmc_sender = #{record.qmcSender,jdbcType=VARCHAR},
+		qmc_sender_uin = #{record.qmcSenderUin,jdbcType=VARCHAR},
+		qmc_sender_nick = #{record.qmcSenderNick,jdbcType=VARCHAR},
+		qmc_msg_date = #{record.qmcMsgDate,jdbcType=BIGINT},
+		qmc_from_qq = #{record.qmcFromQq,jdbcType=VARCHAR},
+		qmc_no = #{record.qmcNo,jdbcType=VARCHAR},
+		qmc_msg = #{record.qmcMsg,jdbcType=LONGVARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update qmc_msgs
+		set qmc_mid = #{record.qmcMid,jdbcType=BIGINT},
+		qmc_group = #{record.qmcGroup,jdbcType=VARCHAR},
+		qmc_group_uin = #{record.qmcGroupUin,jdbcType=VARCHAR},
+		qmc_sender = #{record.qmcSender,jdbcType=VARCHAR},
+		qmc_sender_uin = #{record.qmcSenderUin,jdbcType=VARCHAR},
+		qmc_sender_nick = #{record.qmcSenderNick,jdbcType=VARCHAR},
+		qmc_msg_date = #{record.qmcMsgDate,jdbcType=BIGINT},
+		qmc_from_qq = #{record.qmcFromQq,jdbcType=VARCHAR},
+		qmc_no = #{record.qmcNo,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from qmc_msgs
+		where qmc_mid = #{qmcMid,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from qmc_msgs
+		where qmc_mid = #{qmcMid,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.yhl.f22.frame.db.po.impl.QmcMsgs" useGeneratedKeys="true" keyProperty="qmcMid">
+		insert into qmc_msgs (qmc_group, qmc_group_uin, qmc_sender,
+		qmc_sender_uin, qmc_sender_nick, qmc_msg_date,
+		qmc_from_qq, qmc_no, qmc_msg
+		)
+		values (#{qmcGroup,jdbcType=VARCHAR}, #{qmcGroupUin,jdbcType=VARCHAR}, #{qmcSender,jdbcType=VARCHAR},
+		#{qmcSenderUin,jdbcType=VARCHAR}, #{qmcSenderNick,jdbcType=VARCHAR}, #{qmcMsgDate,jdbcType=BIGINT},
+		#{qmcFromQq,jdbcType=VARCHAR}, #{qmcNo,jdbcType=VARCHAR}, #{qmcMsg,jdbcType=LONGVARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.yhl.f22.frame.db.po.impl.QmcMsgs" useGeneratedKeys="true" keyProperty="qmcMid">
+		insert into qmc_msgs
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			qmc_group,
+			qmc_group_uin,
+			qmc_sender,
+			qmc_sender_uin,
+			qmc_sender_nick,
+			qmc_msg_date,
+			qmc_from_qq,
+			qmc_no,
+			qmc_msg,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{qmcGroup,jdbcType=VARCHAR},
+			#{qmcGroupUin,jdbcType=VARCHAR},
+			#{qmcSender,jdbcType=VARCHAR},
+			#{qmcSenderUin,jdbcType=VARCHAR},
+			#{qmcSenderNick,jdbcType=VARCHAR},
+			#{qmcMsgDate,jdbcType=BIGINT},
+			#{qmcFromQq,jdbcType=VARCHAR},
+			#{qmcNo,jdbcType=VARCHAR},
+			#{qmcMsg,jdbcType=LONGVARCHAR},
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.yhl.f22.frame.db.po.impl.QmcMsgs">
+		update qmc_msgs
+		<set>
+			<if test="qmcGroup != null">
+				qmc_group = #{qmcGroup,jdbcType=VARCHAR},
+			</if>
+			<if test="qmcGroupUin != null">
+				qmc_group_uin = #{qmcGroupUin,jdbcType=VARCHAR},
+			</if>
+			<if test="qmcSender != null">
+				qmc_sender = #{qmcSender,jdbcType=VARCHAR},
+			</if>
+			<if test="qmcSenderUin != null">
+				qmc_sender_uin = #{qmcSenderUin,jdbcType=VARCHAR},
+			</if>
+			<if test="qmcSenderNick != null">
+				qmc_sender_nick = #{qmcSenderNick,jdbcType=VARCHAR},
+			</if>
+			<if test="qmcMsgDate != null">
+				qmc_msg_date = #{qmcMsgDate,jdbcType=BIGINT},
+			</if>
+			<if test="qmcFromQq != null">
+				qmc_from_qq = #{qmcFromQq,jdbcType=VARCHAR},
+			</if>
+			<if test="qmcNo != null">
+				qmc_no = #{qmcNo,jdbcType=VARCHAR},
+			</if>
+			<if test="qmcMsg != null">
+				qmc_msg = #{qmcMsg,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where qmc_mid = #{qmcMid,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yhl.f22.frame.db.po.impl.QmcMsgs">
+		update qmc_msgs
+		set qmc_group = #{qmcGroup,jdbcType=VARCHAR},
+		qmc_group_uin = #{qmcGroupUin,jdbcType=VARCHAR},
+		qmc_sender = #{qmcSender,jdbcType=VARCHAR},
+		qmc_sender_uin = #{qmcSenderUin,jdbcType=VARCHAR},
+		qmc_sender_nick = #{qmcSenderNick,jdbcType=VARCHAR},
+		qmc_msg_date = #{qmcMsgDate,jdbcType=BIGINT},
+		qmc_from_qq = #{qmcFromQq,jdbcType=VARCHAR},
+		qmc_no = #{qmcNo,jdbcType=VARCHAR},
+		qmc_msg = #{qmcMsg,jdbcType=LONGVARCHAR}
+		where qmc_mid = #{qmcMid,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.yhl.f22.frame.db.po.impl.QmcMsgs">
+		update qmc_msgs
+		set qmc_group = #{qmcGroup,jdbcType=VARCHAR},
+		qmc_group_uin = #{qmcGroupUin,jdbcType=VARCHAR},
+		qmc_sender = #{qmcSender,jdbcType=VARCHAR},
+		qmc_sender_uin = #{qmcSenderUin,jdbcType=VARCHAR},
+		qmc_sender_nick = #{qmcSenderNick,jdbcType=VARCHAR},
+		qmc_msg_date = #{qmcMsgDate,jdbcType=BIGINT},
+		qmc_from_qq = #{qmcFromQq,jdbcType=VARCHAR},
+		qmc_no = #{qmcNo,jdbcType=VARCHAR}
+		where qmc_mid = #{qmcMid,jdbcType=BIGINT}
+	</update>
+</mapper>

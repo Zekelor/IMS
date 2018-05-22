@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.yhl.f22.frame.db.dao.QmcUsersMapper">
+	<resultMap id="BaseResultMap" type="com.yhl.f22.frame.db.po.impl.QmcUsers">
+		<id column="qmc_uid" property="qmcUid" jdbcType="BIGINT" />
+		<result column="qmc_uname" property="qmcUname" jdbcType="VARCHAR" />
+		<result column="qmc_pwd" property="qmcPwd" jdbcType="VARCHAR" />
+		<result column="qmc_no" property="qmcNo" jdbcType="VARCHAR" />
+		<result column="qmc_tel" property="qmcTel" jdbcType="VARCHAR" />
+		<result column="qmc_access_token" property="qmcAccessToken" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.yhl.f22.frame.db.po.impl.QmcUsersWithBLOBs" extends="BaseResultMap">
+		<result column="qmc_allow_qq" property="qmcAllowQq" jdbcType="LONGVARCHAR" />
+		<result column="qmc_allow_group" property="qmcAllowGroup" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		qmc_uid, qmc_uname, qmc_pwd, qmc_no, qmc_tel, qmc_access_token
+	</sql>
+	<sql id="Blob_Column_List">
+		qmc_allow_qq, qmc_allow_group
+	</sql>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.yhl.f22.frame.db.po.impl.QmcUsersExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from qmc_users
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yhl.f22.frame.db.po.impl.QmcUsersExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from qmc_users
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByExampleWithBLOBsAndPage" resultMap="ResultMapWithBLOBs" parameterType="com.yhl.f22.frame.db.po.impl.QmcUsersExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from qmc_users
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.yhl.f22.frame.db.po.impl.QmcUsersExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from qmc_users
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<delete id="deleteByExample" parameterType="com.yhl.f22.frame.db.po.impl.QmcUsersExample">
+		delete from qmc_users
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<select id="countByExample" parameterType="com.yhl.f22.frame.db.po.impl.QmcUsersExample" resultType="java.lang.Integer">
+		select count(*) from qmc_users
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update qmc_users
+		<set>
+			<if test="record.qmcUid != null">
+				qmc_uid = #{record.qmcUid,jdbcType=BIGINT},
+			</if>
+			<if test="record.qmcUname != null">
+				qmc_uname = #{record.qmcUname,jdbcType=VARCHAR},
+			</if>
+			<if test="record.qmcPwd != null">
+				qmc_pwd = #{record.qmcPwd,jdbcType=VARCHAR},
+			</if>
+			<if test="record.qmcNo != null">
+				qmc_no = #{record.qmcNo,jdbcType=VARCHAR},
+			</if>
+			<if test="record.qmcTel != null">
+				qmc_tel = #{record.qmcTel,jdbcType=VARCHAR},
+			</if>
+			<if test="record.qmcAccessToken != null">
+				qmc_access_token = #{record.qmcAccessToken,jdbcType=VARCHAR},
+			</if>
+			<if test="record.qmcAllowQq != null">
+				qmc_allow_qq = #{record.qmcAllowQq,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="record.qmcAllowGroup != null">
+				qmc_allow_group = #{record.qmcAllowGroup,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExampleWithBLOBs" parameterType="map">
+		update qmc_users
+		set qmc_uid = #{record.qmcUid,jdbcType=BIGINT},
+		qmc_uname = #{record.qmcUname,jdbcType=VARCHAR},
+		qmc_pwd = #{record.qmcPwd,jdbcType=VARCHAR},
+		qmc_no = #{record.qmcNo,jdbcType=VARCHAR},
+		qmc_tel = #{record.qmcTel,jdbcType=VARCHAR},
+		qmc_access_token = #{record.qmcAccessToken,jdbcType=VARCHAR},
+		qmc_allow_qq = #{record.qmcAllowQq,jdbcType=LONGVARCHAR},
+		qmc_allow_group = #{record.qmcAllowGroup,jdbcType=LONGVARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update qmc_users
+		set qmc_uid = #{record.qmcUid,jdbcType=BIGINT},
+		qmc_uname = #{record.qmcUname,jdbcType=VARCHAR},
+		qmc_pwd = #{record.qmcPwd,jdbcType=VARCHAR},
+		qmc_no = #{record.qmcNo,jdbcType=VARCHAR},
+		qmc_tel = #{record.qmcTel,jdbcType=VARCHAR},
+		qmc_access_token = #{record.qmcAccessToken,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from qmc_users
+		where qmc_uid = #{qmcUid,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from qmc_users
+		where qmc_uid = #{qmcUid,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.yhl.f22.frame.db.po.impl.QmcUsersWithBLOBs" useGeneratedKeys="true" keyProperty="qmcUid">
+		insert into qmc_users (qmc_uname, qmc_pwd, qmc_no,
+		qmc_tel, qmc_access_token, qmc_allow_qq,
+		qmc_allow_group)
+		values (#{qmcUname,jdbcType=VARCHAR}, #{qmcPwd,jdbcType=VARCHAR}, #{qmcNo,jdbcType=VARCHAR},
+		#{qmcTel,jdbcType=VARCHAR}, #{qmcAccessToken,jdbcType=VARCHAR}, #{qmcAllowQq,jdbcType=LONGVARCHAR},
+		#{qmcAllowGroup,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.yhl.f22.frame.db.po.impl.QmcUsersWithBLOBs" useGeneratedKeys="true" keyProperty="qmcUid">
+		insert into qmc_users
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			qmc_uname,
+			qmc_pwd,
+			qmc_no,
+			qmc_tel,
+			qmc_access_token,
+			qmc_allow_qq,
+			qmc_allow_group,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{qmcUname,jdbcType=VARCHAR},
+			#{qmcPwd,jdbcType=VARCHAR},
+			#{qmcNo,jdbcType=VARCHAR},
+			#{qmcTel,jdbcType=VARCHAR},
+			#{qmcAccessToken,jdbcType=VARCHAR},
+			#{qmcAllowQq,jdbcType=LONGVARCHAR},
+			#{qmcAllowGroup,jdbcType=LONGVARCHAR},
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.yhl.f22.frame.db.po.impl.QmcUsersWithBLOBs">
+		update qmc_users
+		<set>
+			<if test="qmcUname != null">
+				qmc_uname = #{qmcUname,jdbcType=VARCHAR},
+			</if>
+			<if test="qmcPwd != null">
+				qmc_pwd = #{qmcPwd,jdbcType=VARCHAR},
+			</if>
+			<if test="qmcNo != null">
+				qmc_no = #{qmcNo,jdbcType=VARCHAR},
+			</if>
+			<if test="qmcTel != null">
+				qmc_tel = #{qmcTel,jdbcType=VARCHAR},
+			</if>
+			<if test="qmcAccessToken != null">
+				qmc_access_token = #{qmcAccessToken,jdbcType=VARCHAR},
+			</if>
+			<if test="qmcAllowQq != null">
+				qmc_allow_qq = #{qmcAllowQq,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="qmcAllowGroup != null">
+				qmc_allow_group = #{qmcAllowGroup,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where qmc_uid = #{qmcUid,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yhl.f22.frame.db.po.impl.QmcUsersWithBLOBs">
+		update qmc_users
+		set qmc_uname = #{qmcUname,jdbcType=VARCHAR},
+		qmc_pwd = #{qmcPwd,jdbcType=VARCHAR},
+		qmc_no = #{qmcNo,jdbcType=VARCHAR},
+		qmc_tel = #{qmcTel,jdbcType=VARCHAR},
+		qmc_access_token = #{qmcAccessToken,jdbcType=VARCHAR},
+		qmc_allow_qq = #{qmcAllowQq,jdbcType=LONGVARCHAR},
+		qmc_allow_group = #{qmcAllowGroup,jdbcType=LONGVARCHAR}
+		where qmc_uid = #{qmcUid,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.yhl.f22.frame.db.po.impl.QmcUsers">
+		update qmc_users
+		set qmc_uname = #{qmcUname,jdbcType=VARCHAR},
+		qmc_pwd = #{qmcPwd,jdbcType=VARCHAR},
+		qmc_no = #{qmcNo,jdbcType=VARCHAR},
+		qmc_tel = #{qmcTel,jdbcType=VARCHAR},
+		qmc_access_token = #{qmcAccessToken,jdbcType=VARCHAR}
+		where qmc_uid = #{qmcUid,jdbcType=BIGINT}
+	</update>
+</mapper>

@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>SAP LIBRA PLATFORM</display-name>
+
+	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>f22frame.root</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>logbackXml</param-name>
+		<param-value>/WEB-INF/classes/META-INF/logger/logback.xml</param-value>
+	</context-param>
+
+	<!-- 配置文件 加载 start -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			<!-- /WEB-INF/classes/META-INF/spring/applicationContext-service.xml, 
+    		/WEB-INF/classes/META-INF/spring/applicationContext-redis.xml,  -->
+			classpath*:META-INF/**/applicationContext-*.xml
+    	</param-value>
+	</context-param>
+	<!-- 配置文件 加载 end -->
+
+	<servlet>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+				/WEB-INF/classes/META-INF/spring/applicationContext-controller.xml
+            </param-value>
+		</init-param>
+		<init-param>
+			<description>使DispatcherServlet支持HTTP的option方法</description>
+			<param-name>dispatchOptionsRequest</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<description>使DispatcherServlet支持HTTP的trace方法</description>
+			<param-name>dispatchTraceRequest</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>UserServlet</servlet-name>
+		<servlet-class>com.frame.usermgr.UserServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>UserAddServlet</servlet-name>
+		<servlet-class>com.frame.usermgr.UserAddServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>UserEditServlet</servlet-name>
+		<servlet-class>com.frame.usermgr.UserEditServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>GroupServlet</servlet-name>
+		<servlet-class>com.frame.qqgroup.GroupServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>TagServlet</servlet-name>
+		<servlet-class>com.frame.tagmgr.TagServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>LogServlet</servlet-name>
+		<servlet-class>com.frame.logmgr.LogServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>com.frame.login.LoginServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>QueryServlet</servlet-name>
+		<servlet-class>com.frame.querymgr.QueryServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>ReportServlet</servlet-name>
+		<servlet-class>com.frame.reportmgr.ReportServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>FileDownloadServlet</servlet-name>
+		<servlet-class>com.frame.common.FileDownloadServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>FeedBackServlet</servlet-name>
+		<servlet-class>com.frame.feedbackmgr.FeedBackServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>DepartServlet</servlet-name>
+		<servlet-class>com.frame.departmgr.DepartServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>MonitorServlet</servlet-name>
+		<servlet-class>com.frame.monitormgr.MonitorServlet</servlet-class>
+	</servlet>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	<!-- 用户管理 -->
+	<servlet-mapping>
+		<servlet-name>UserServlet</servlet-name>
+		<url-pattern>/servlet/UserServlet.do</url-pattern>
+	</servlet-mapping>
+	<!-- 查询用户列表 -->
+	<servlet-mapping>
+		<servlet-name>UserServlet</servlet-name>
+		<url-pattern>/servlet/toUserList.do</url-pattern>
+	</servlet-mapping>
+	<!-- AJAX请求路径 -->
+	<servlet-mapping>
+		<servlet-name>UserServlet</servlet-name>
+		<url-pattern>/servlet/queryAccount</url-pattern>
+	</servlet-mapping>
+	<!-- 用户添加 -->
+	<servlet-mapping>
+		<servlet-name>UserServlet</servlet-name>
+		<url-pattern>/servlet/toAddUser.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- 判断用户名是否存在 -->
+	<servlet-mapping>
+		<servlet-name>UserServlet</servlet-name>
+		<url-pattern>/servlet/queryUserNameExsit</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- 用户添加提交表单 -->
+	<servlet-mapping>
+		<servlet-name>UserAddServlet</servlet-name>
+		<url-pattern>/servlet/UserAddServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- 用户编辑 -->
+	<servlet-mapping>
+		<servlet-name>UserServlet</servlet-name>
+		<url-pattern>/servlet/toEdit.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>UserEditServlet</servlet-name>
+		<url-pattern>/servlet/UserEditServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- 删除用户 -->
+	<servlet-mapping>
+		<servlet-name>UserServlet</servlet-name>
+		<url-pattern>/servlet/UserDelServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- QQ群管理 -->
+	<servlet-mapping>
+		<servlet-name>GroupServlet</servlet-name>
+		<url-pattern>/servlet/GroupServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- AJAX请求路径 -->
+	<servlet-mapping>
+		<servlet-name>GroupServlet</servlet-name>
+		<url-pattern>/servlet/queryGroup</url-pattern>
+	</servlet-mapping>
+
+	<!-- 根据选择的标签条件查询列表 -->
+	<servlet-mapping>
+		<servlet-name>GroupServlet</servlet-name>
+		<url-pattern>/servlet/queryGroupByTag</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>GroupServlet</servlet-name>
+		<url-pattern>/servlet/toGroupList.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- 跳转至群详情页面 -->
+	<servlet-mapping>
+		<servlet-name>GroupServlet</servlet-name>
+		<url-pattern>/servlet/toDetail.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- 查询群详情 -->
+	<servlet-mapping>
+		<servlet-name>GroupServlet</servlet-name>
+		<url-pattern>/servlet/queryGroupDetail</url-pattern>
+	</servlet-mapping>
+
+	<!-- 标签 -->
+	<servlet-mapping>
+		<servlet-name>TagServlet</servlet-name>
+		<url-pattern>/servlet/queryTag</url-pattern>
+	</servlet-mapping>
+
+	<!-- 查询标签是否存在 -->
+	<servlet-mapping>
+		<servlet-name>TagServlet</servlet-name>
+		<url-pattern>/servlet/queryTagExist</url-pattern>
+	</servlet-mapping>
+	<!-- 添加标签 -->
+	<servlet-mapping>
+		<servlet-name>TagServlet</servlet-name>
+		<url-pattern>/servlet/toAddTag.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- 绑定账号与标签 -->
+	<servlet-mapping>
+		<servlet-name>TagServlet</servlet-name>
+		<url-pattern>/servlet/blindTag</url-pattern>
+	</servlet-mapping>
+
+	<!-- 跳转至日志页面 -->
+	<servlet-mapping>
+		<servlet-name>LogServlet</servlet-name>
+		<url-pattern>/servlet/toLogList.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- 查询日志列表 -->
+	<servlet-mapping>
+		<servlet-name>LogServlet</servlet-name>
+		<url-pattern>/servlet/queryLogList</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>LogServlet</servlet-name>
+		<url-pattern>/servlet/queryLogTable</url-pattern>
+	</servlet-mapping>
+	<!-- 用户登录 -->
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/servlet/login.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/servlet/logout.do</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- 全文检索 -->
+	<servlet-mapping>
+		<servlet-name>QueryServlet</servlet-name>
+		<url-pattern>/servlet/toSearch.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- 点击搜索进行查询结果 -->
+	<servlet-mapping>
+		<servlet-name>QueryServlet</servlet-name>
+		<url-pattern>/servlet/queryResult</url-pattern>
+	</servlet-mapping>
+
+	<!-- 跳转至查询群Tab -->
+	<servlet-mapping>
+		<servlet-name>QueryServlet</servlet-name>
+		<url-pattern>/servlet/toQueryGroupList.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- 跳转至查询消息Tab -->
+	<servlet-mapping>
+		<servlet-name>QueryServlet</servlet-name>
+		<url-pattern>/servlet/toQueryMsgList.do</url-pattern>
+	</servlet-mapping>
+	<!-- 查询搜索结果列表1 -->
+	<servlet-mapping>
+		<servlet-name>QueryServlet</servlet-name>
+		<url-pattern>/servlet/querySearchGroup</url-pattern>
+	</servlet-mapping>
+
+	<!-- 查询搜索结果列表2 -->
+	<servlet-mapping>
+		<servlet-name>QueryServlet</servlet-name>
+		<url-pattern>/servlet/querySearchMsg</url-pattern>
+	</servlet-mapping>
+	<!-- 全文搜索结果跳转新窗口打开 -->
+	<servlet-mapping>
+		<servlet-name>QueryServlet</servlet-name>
+		<url-pattern>/servlet/toData2.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- 跳转至报告管理页面 -->
+	<servlet-mapping>
+		<servlet-name>ReportServlet</servlet-name>
+		<url-pattern>/report/toReport.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- 查询报告管理账号 -->
+	<servlet-mapping>
+		<servlet-name>ReportServlet</servlet-name>
+		<url-pattern>/report/queryReport</url-pattern>
+	</servlet-mapping>
+
+	<!-- 跳转至添加报告页面 -->
+	<servlet-mapping>
+		<servlet-name>ReportServlet</servlet-name>
+		<url-pattern>/report/toAdd.do</url-pattern>
+	</servlet-mapping>
+	<!-- 提交查询 -->
+	<servlet-mapping>
+		<servlet-name>ReportServlet</servlet-name>
+		<url-pattern>/report/addReport</url-pattern>
+	</servlet-mapping>
+
+	<!-- 跳转至编辑标记页面 -->
+	<servlet-mapping>
+		<servlet-name>ReportServlet</servlet-name>
+		<url-pattern>/report/toEdit.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- 提交编辑 -->
+	<servlet-mapping>
+		<servlet-name>ReportServlet</servlet-name>
+		<url-pattern>/report/editReport</url-pattern>
+	</servlet-mapping>
+
+	<!-- 删除报告记录 -->
+	<servlet-mapping>
+		<servlet-name>ReportServlet</servlet-name>
+		<url-pattern>/report/deleteReport</url-pattern>
+	</servlet-mapping>
+
+	<!-- 下载文件 -->
+	<servlet-mapping>
+		<servlet-name>ReportServlet</servlet-name>
+		<url-pattern>/report/download</url-pattern>
+	</servlet-mapping>
+
+	<!-- 跳转至反馈列表 -->
+	<servlet-mapping>
+		<servlet-name>FeedBackServlet</servlet-name>
+		<url-pattern>/feedback/toFeedBack.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- 查询反馈列表 -->
+	<servlet-mapping>
+		<servlet-name>FeedBackServlet</servlet-name>
+		<url-pattern>/feedback/queryFeedBack</url-pattern>
+	</servlet-mapping>
+
+	<!-- 跳转至添加反馈 -->
+	<servlet-mapping>
+		<servlet-name>FeedBackServlet</servlet-name>
+		<url-pattern>/feedback/toAdd.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- 提交反馈 -->
+	<servlet-mapping>
+		<servlet-name>FeedBackServlet</servlet-name>
+		<url-pattern>/feedback/addFeedBack</url-pattern>
+	</servlet-mapping>
+
+	<!-- 跳转反馈编辑 -->
+	<servlet-mapping>
+		<servlet-name>FeedBackServlet</servlet-name>
+		<url-pattern>/feedback/toEdit.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- 反馈编辑提交 -->
+	<servlet-mapping>
+		<servlet-name>FeedBackServlet</servlet-name>
+		<url-pattern>/feedback/editFeedBack</url-pattern>
+	</servlet-mapping>
+
+	<!-- 反馈删除 -->
+	<servlet-mapping>
+		<servlet-name>FeedBackServlet</servlet-name>
+		<url-pattern>/feedback/deleteFeedBack</url-pattern>
+	</servlet-mapping>
+
+	<!-- 反馈下载 -->
+	<servlet-mapping>
+		<servlet-name>FeedBackServlet</servlet-name>
+		<url-pattern>/feedback/download</url-pattern>
+	</servlet-mapping>
+
+	<!-- 部门管理 -->
+	<servlet-mapping>
+		<servlet-name>DepartServlet</servlet-name>
+		<url-pattern>/department/toDepart.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- 查询部门信息 -->
+	<servlet-mapping>
+		<servlet-name>DepartServlet</servlet-name>
+		<url-pattern>/department/queryDepart</url-pattern>
+	</servlet-mapping>
+
+	<!-- 添加部门 -->
+	<servlet-mapping>
+		<servlet-name>DepartServlet</servlet-name>
+		<url-pattern>/department/toAdd.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>DepartServlet</servlet-name>
+		<url-pattern>/department/addDepart</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- 编辑部门 -->
+	<servlet-mapping>
+		<servlet-name>DepartServlet</servlet-name>
+		<url-pattern>/department/toEdit.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>DepartServlet</servlet-name>
+		<url-pattern>/department/editDepart</url-pattern>
+	</servlet-mapping>
+
+	<!-- 用户添加时查询已有部门 -->
+	<servlet-mapping>
+		<servlet-name>DepartServlet</servlet-name>
+		<url-pattern>/department/queryAddDepart</url-pattern>
+	</servlet-mapping>
+
+	<!-- 监控账号 -->
+	<servlet-mapping>
+		<servlet-name>MonitorServlet</servlet-name>
+		<url-pattern>/monitor/toMonitor.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- 查询监控账号列表 -->
+	<servlet-mapping>
+		<servlet-name>MonitorServlet</servlet-name>
+		<url-pattern>/monitor/queryMonitor</url-pattern>
+	</servlet-mapping>
+
+	<!--跳转至监控账号下的群列表  -->
+	<servlet-mapping>
+		<servlet-name>MonitorServlet</servlet-name>
+		<url-pattern>/monitor/toGroup.do</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 查询监控账号下的群列表 -->
+	<servlet-mapping>
+		<servlet-name>MonitorServlet</servlet-name>
+		<url-pattern>/monitor/queryGroup</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 跳转至账号详情列表 -->
+	<servlet-mapping>
+		<servlet-name>MonitorServlet</servlet-name>
+		<url-pattern>/monitor/toDetail.do</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 查询账号详情列表 -->
+	<servlet-mapping>
+		<servlet-name>MonitorServlet</servlet-name>
+		<url-pattern>/monitor/queryGroupDetail</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 查询要分配的部门 -->
+	<servlet-mapping>
+		<servlet-name>MonitorServlet</servlet-name>
+		<url-pattern>/monitor/queryDepart</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>MonitorServlet</servlet-name>
+		<url-pattern>/monitor/monitorDepart</url-pattern>
+	</servlet-mapping>
+	
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<welcome-file-list>
+		<welcome-file>/jsp/login.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>

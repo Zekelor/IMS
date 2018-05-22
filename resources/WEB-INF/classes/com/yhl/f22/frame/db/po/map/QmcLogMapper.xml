@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.yhl.f22.frame.db.dao.QmcLogMapper">
+	<resultMap id="BaseResultMap" type="com.yhl.f22.frame.db.po.impl.QmcLog">
+		<id column="qmc_log_id" property="qmcLogId" jdbcType="BIGINT" />
+		<result column="qmc_no" property="qmcNo" jdbcType="VARCHAR" />
+		<result column="qmc_ip" property="qmcIp" jdbcType="VARCHAR" />
+		<result column="qmc_last_date" property="qmcLastDate" jdbcType="BIGINT" />
+		<result column="qmc_qq" property="qmcQq" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		qmc_log_id, qmc_no, qmc_ip, qmc_last_date, qmc_qq
+	</sql>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yhl.f22.frame.db.po.impl.QmcLogExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from qmc_log
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.yhl.f22.frame.db.po.impl.QmcLogExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from qmc_log
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<delete id="deleteByExample" parameterType="com.yhl.f22.frame.db.po.impl.QmcLogExample">
+		delete from qmc_log
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<select id="countByExample" parameterType="com.yhl.f22.frame.db.po.impl.QmcLogExample" resultType="java.lang.Integer">
+		select count(*) from qmc_log
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update qmc_log
+		<set>
+			<if test="record.qmcLogId != null">
+				qmc_log_id = #{record.qmcLogId,jdbcType=BIGINT},
+			</if>
+			<if test="record.qmcNo != null">
+				qmc_no = #{record.qmcNo,jdbcType=VARCHAR},
+			</if>
+			<if test="record.qmcIp != null">
+				qmc_ip = #{record.qmcIp,jdbcType=VARCHAR},
+			</if>
+			<if test="record.qmcLastDate != null">
+				qmc_last_date = #{record.qmcLastDate,jdbcType=BIGINT},
+			</if>
+			<if test="record.qmcQq != null">
+				qmc_qq = #{record.qmcQq,jdbcType=VARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update qmc_log
+		set qmc_log_id = #{record.qmcLogId,jdbcType=BIGINT},
+		qmc_no = #{record.qmcNo,jdbcType=VARCHAR},
+		qmc_ip = #{record.qmcIp,jdbcType=VARCHAR},
+		qmc_last_date = #{record.qmcLastDate,jdbcType=BIGINT},
+		qmc_qq = #{record.qmcQq,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from qmc_log
+		where qmc_log_id = #{qmcLogId,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from qmc_log
+		where qmc_log_id = #{qmcLogId,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.yhl.f22.frame.db.po.impl.QmcLog" useGeneratedKeys="true" keyProperty="qmcLogId">
+		insert into qmc_log (qmc_no, qmc_ip, qmc_last_date,
+		qmc_qq)
+		values (#{qmcNo,jdbcType=VARCHAR}, #{qmcIp,jdbcType=VARCHAR}, #{qmcLastDate,jdbcType=BIGINT},
+		#{qmcQq,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.yhl.f22.frame.db.po.impl.QmcLog" useGeneratedKeys="true" keyProperty="qmcLogId">
+		insert into qmc_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			qmc_no,
+			qmc_ip,
+			qmc_last_date,
+			qmc_qq,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{qmcNo,jdbcType=VARCHAR},
+			#{qmcIp,jdbcType=VARCHAR},
+			#{qmcLastDate,jdbcType=BIGINT},
+			#{qmcQq,jdbcType=VARCHAR},
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.yhl.f22.frame.db.po.impl.QmcLog">
+		update qmc_log
+		<set>
+			<if test="qmcNo != null">
+				qmc_no = #{qmcNo,jdbcType=VARCHAR},
+			</if>
+			<if test="qmcIp != null">
+				qmc_ip = #{qmcIp,jdbcType=VARCHAR},
+			</if>
+			<if test="qmcLastDate != null">
+				qmc_last_date = #{qmcLastDate,jdbcType=BIGINT},
+			</if>
+			<if test="qmcQq != null">
+				qmc_qq = #{qmcQq,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where qmc_log_id = #{qmcLogId,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.yhl.f22.frame.db.po.impl.QmcLog">
+		update qmc_log
+		set qmc_no = #{qmcNo,jdbcType=VARCHAR},
+		qmc_ip = #{qmcIp,jdbcType=VARCHAR},
+		qmc_last_date = #{qmcLastDate,jdbcType=BIGINT},
+		qmc_qq = #{qmcQq,jdbcType=VARCHAR}
+		where qmc_log_id = #{qmcLogId,jdbcType=BIGINT}
+	</update>
+</mapper>

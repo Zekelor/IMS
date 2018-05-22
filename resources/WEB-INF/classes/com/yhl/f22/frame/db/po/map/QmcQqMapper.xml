@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.yhl.f22.frame.db.dao.QmcQqMapper">
+	<resultMap id="BaseResultMap" type="com.yhl.f22.frame.db.po.impl.QmcQq">
+		<id column="qmc_qqid" property="qmcQqid" jdbcType="BIGINT" />
+		<result column="qmc_no" property="qmcNo" jdbcType="VARCHAR" />
+		<result column="qmc_qq" property="qmcQq" jdbcType="VARCHAR" />
+		<result column="qmc_qquin" property="qmcQquin" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		qmc_qqid, qmc_no, qmc_qq, qmc_qquin
+	</sql>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.yhl.f22.frame.db.po.impl.QmcQqExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from qmc_qq
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.yhl.f22.frame.db.po.impl.QmcQqExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from qmc_qq
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<delete id="deleteByExample" parameterType="com.yhl.f22.frame.db.po.impl.QmcQqExample">
+		delete from qmc_qq
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<select id="countByExample" parameterType="com.yhl.f22.frame.db.po.impl.QmcQqExample" resultType="java.lang.Integer">
+		select count(*) from qmc_qq
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update qmc_qq
+		<set>
+			<if test="record.qmcQqid != null">
+				qmc_qqid = #{record.qmcQqid,jdbcType=BIGINT},
+			</if>
+			<if test="record.qmcNo != null">
+				qmc_no = #{record.qmcNo,jdbcType=VARCHAR},
+			</if>
+			<if test="record.qmcQq != null">
+				qmc_qq = #{record.qmcQq,jdbcType=VARCHAR},
+			</if>
+			<if test="record.qmcQquin != null">
+				qmc_qquin = #{record.qmcQquin,jdbcType=VARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update qmc_qq
+		set qmc_qqid = #{record.qmcQqid,jdbcType=BIGINT},
+		qmc_no = #{record.qmcNo,jdbcType=VARCHAR},
+		qmc_qq = #{record.qmcQq,jdbcType=VARCHAR},
+		qmc_qquin = #{record.qmcQquin,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from qmc_qq
+		where qmc_qqid = #{qmcQqid,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from qmc_qq
+		where qmc_qqid = #{qmcQqid,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.yhl.f22.frame.db.po.impl.QmcQq" useGeneratedKeys="true" keyProperty="qmcQqid">
+		insert into qmc_qq (qmc_no, qmc_qq, qmc_qquin
+		)
+		values (#{qmcNo,jdbcType=VARCHAR}, #{qmcQq,jdbcType=VARCHAR}, #{qmcQquin,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.yhl.f22.frame.db.po.impl.QmcQq" useGeneratedKeys="true" keyProperty="qmcQqid">
+		insert into qmc_qq
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			qmc_no,
+			qmc_qq,
+			qmc_qquin,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{qmcNo,jdbcType=VARCHAR},
+			#{qmcQq,jdbcType=VARCHAR},
+			#{qmcQquin,jdbcType=VARCHAR},
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.yhl.f22.frame.db.po.impl.QmcQq">
+		update qmc_qq
+		<set>
+			<if test="qmcNo != null">
+				qmc_no = #{qmcNo,jdbcType=VARCHAR},
+			</if>
+			<if test="qmcQq != null">
+				qmc_qq = #{qmcQq,jdbcType=VARCHAR},
+			</if>
+			<if test="qmcQquin != null">
+				qmc_qquin = #{qmcQquin,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where qmc_qqid = #{qmcQqid,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.yhl.f22.frame.db.po.impl.QmcQq">
+		update qmc_qq
+		set qmc_no = #{qmcNo,jdbcType=VARCHAR},
+		qmc_qq = #{qmcQq,jdbcType=VARCHAR},
+		qmc_qquin = #{qmcQquin,jdbcType=VARCHAR}
+		where qmc_qqid = #{qmcQqid,jdbcType=BIGINT}
+	</update>
+</mapper>
